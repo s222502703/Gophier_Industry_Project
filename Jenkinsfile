@@ -1,28 +1,14 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    echo 'Checking out the code from the Git repository...'
-                    // Use credentials for checkout
-                    git branch: 'main', url: 'https://github.com/s222502703/Gophier_Industry_Project.git', credentialsId: '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'
-                }
+                echo 'Checking out the code from the Git repository...'
+                git url: 'https://github.com/s222502703/Gophier_Industry_Project.git', branch: 'main', credentialsId: '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'
             }
         }
-        
-        stage('Build') {
-            steps {
-                script {
-                    echo 'Building the project...'
-                    withMaven(maven: 'Maven 3.8.1') {  // Use the name of your configured Maven
-                        sh 'mvn clean package'  // This will generate the JAR in the target directory
-                    }
-                }
-            }
-        }
-        // Additional stages (Test, Code Quality Analysis, Deploy) go here...
+        // Add other stages (Build, Test, etc.) here...
     }
     
     post {
