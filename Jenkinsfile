@@ -13,11 +13,14 @@ pipeline {
             }
         }
 
-        stage('Archive Artifacts') {
-            steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-            }
-        }
+       stage('Save Build Outputs') {
+    steps {
+        echo 'Archiving build outputs...'
+        // Archive multiple artifacts including jar, logs, and reports
+        archiveArtifacts artifacts: 'target/**/*.jar, target/**/*.log, target/site/**/*', fingerprint: true
+    }
+}
+
 
         stage('Test') {
             steps {
