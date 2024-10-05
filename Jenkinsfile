@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     tools {
-        maven 'M3'  // Jenkins should have a Maven installation configured as 'M3'
+        maven 'M3'  // Ensure Jenkins has a Maven installation configured as 'M3'
     }
 
     stages {
@@ -12,8 +12,9 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage ('Archive Artifacts'){
-            steps{
+
+        stage('Archive Artifacts') {
+            steps {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
@@ -25,8 +26,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
-        // Add additional stages (like Deploy, etc.) if needed.
     }
 
     post {
@@ -37,8 +36,11 @@ pipeline {
             echo 'Pipeline failed. Check the logs for details.'
         }
         always {
-            // Comment this out if you don't have tests yet
+            // Uncomment this when test reports are available
             // junit '**/target/surefire-reports/*.xml' // Collect test results (JUnit reports)
+
+            // Optional: Clean up the workspace after the build
+            cleanWs()
         }
     }
 }
