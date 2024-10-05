@@ -8,6 +8,12 @@ pipeline {
                 git url: 'https://github.com/s222502703/Gophier_Industry_Project.git', branch: 'main', credentialsId: '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'
             }
         }
+         stage('Build') {
+            steps {
+                // Use Maven to build the project
+                sh 'mvn clean install'
+            }
+        }
         // Add other stages (Build, Test, etc.) here...
     }
     
