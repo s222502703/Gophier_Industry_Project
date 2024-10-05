@@ -17,7 +17,7 @@ pipeline {
     steps {
         echo 'Archiving build outputs...'
         // Archive multiple artifacts including jar, logs, and reports
-        archiveArtifacts artifacts: 'target/**/*.jar, fingerprint: true
+        archiveArtifacts artifacts: 'target/**/*.jar, fingerprint: true'
     }
 }
 
