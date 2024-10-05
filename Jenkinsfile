@@ -1,26 +1,38 @@
 pipeline {
     agent any 
     tools {
-        maven 'M3'
+        maven 'M3'  // Jenkins should have a Maven installation configured as 'M3'
     }
 
     stages {
         stage('Build') {
             steps {
                 echo 'Building the project using Maven...'
-                // Use Maven to build the project
+                // Maven build
                 sh 'mvn clean install'
             }
         }
-        // Add other stages (Test, Deploy, etc.) here...
+
+        stage('Test') {
+            steps {
+                echo 'Running unit tests using JUnit...'
+                // Run tests with Maven
+                sh 'mvn test'
+            }
+        }
+
+        // Add additional stages (like Deploy, etc.) if needed.
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Pipeline completed successfully, all tests passed!'
         }
         failure {
-            echo 'Pipeline failed. Please check the logs for more information.'
+            echo 'Pipeline failed. Check the logs for details.'
+        }
+        always {
+            junit '**/target/surefire-reports/*.xml' // Collect test results (JUnit reports)
         }
     }
 }
