@@ -17,11 +17,16 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+<dependencies>
+    <!-- JUnit Dependency for Testing -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.2</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
 
-    <!-- Dependencies -->
-    <dependencies>
-        <!-- You can add additional dependencies here if needed -->
-    </dependencies>
 
     <!-- Build Configuration -->
     <build>
