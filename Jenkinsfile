@@ -12,7 +12,7 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage ('Archive Artifects'){
+        stage ('Archive Artifacts'){
             steps{
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
@@ -37,7 +37,8 @@ pipeline {
             echo 'Pipeline failed. Check the logs for details.'
         }
         always {
-            junit '**/target/surefire-reports/*.xml' // Collect test results (JUnit reports)
+            // Comment this out if you don't have tests yet
+            // junit '**/target/surefire-reports/*.xml' // Collect test results (JUnit reports)
         }
     }
 }
